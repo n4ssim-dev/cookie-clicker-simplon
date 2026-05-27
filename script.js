@@ -1,10 +1,10 @@
 const cookieBtn = document.getElementById("click")
 const cookieScore = document.getElementById("cookie-score")
 const multiplierBtn = document.getElementById("multiplier")
-const multiplierScore = document.getElementById("multiplier-score")
 
 let score = 0
-let multiplier = 1
+let multiplierCount = 1
+let multiplier = 1 * multiplierCount
 
 async function incrementScore(event) {
     event.preventDefault();
@@ -14,13 +14,14 @@ async function incrementScore(event) {
 
 async function augmenterMultiplicateur(event) {
     event.preventDefault();
-
-    if (score < 50) {
+    coutMultiplier = 50 * multiplierCount
+    if (score < coutMultiplier) {
         return false;
-    } else if (score >=50) {
-        multiplier++
-        multiplierScore.textContent = `x${multiplier}`
-        score-=50
+    } else if (score >= coutMultiplier) {
+        multiplier++;
+        multiplierCount++
+        multiplierBtn.textContent = `Multiplicateur : x${multiplier} (Coût: ${50*multiplierCount})`
+        score-= coutMultiplier
         cookieScore.textContent = score;
     }
 }
