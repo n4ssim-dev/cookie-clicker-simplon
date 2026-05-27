@@ -4,7 +4,11 @@ const multiplierBtn = document.getElementById("multiplier")
 const autoclickerBtn = document.getElementById("autoclic")
 const bonusBtn = document.getElementById("bonus")
 
-let score = 6300
+multiplierBtn.setAttribute("disabled", "")
+bonusBtn.setAttribute("disabled", "")
+autoclickerBtn.setAttribute("disabled", "")
+
+let score = 49
 cookieScore.textContent = score
 let multiplierCount = 0
 let multiplier = 1
@@ -42,47 +46,42 @@ async function incrementScore(event) {
 
 async function augmenterMultiplicateur(event) {
     event.preventDefault();
-    const coutMultiplier = 50 * Math.pow(2, multiplierCount)
-    if (score < coutMultiplier) {
+    const cout = 50 * Math.pow(2, multiplierCount);
+    if (score < cout) {
         return false;
     }
-    score -= coutMultiplier;
+    score -= cout;
     multiplierCount++;
     multiplier *= 2;
-    multiplierBtn.textContent = `Multiplicateur : x${multiplier} (Coût: ${50 * Math.pow(2, multiplierCount)})`
+    multiplierBtn.textContent = `Multiplicateur : x${multiplier} (Coût: ${50 * Math.pow(2, multiplierCount)})`;
     cookieScore.textContent = score;
 }
 
 async function acheterAutoclicker(event) {
     event.preventDefault();
-
     if (autoclicCout > score) {
         return false;
     } else if (autoclicCout <= score && autoclicAchete == false) {
         autoclicAchete = true;
-        score -= autoclicCout
-        autoclickerBtn.textContent = `Autoclicker (Acheté)`
+        score -= autoclicCout;
+        autoclickerBtn.textContent = `Autoclicker (Acheté)`;
         cookieScore.textContent = score;
-        loop_autoclic = setInterval(function(){
+        setInterval(function() {
             score += 1 * multiplier * bonusMultiplier;
             cookieScore.textContent = score;
-        }, 1000)
+        }, 1000);
     }
 }
 
 async function acheterBonus(event) {
     event.preventDefault();
-
     if (scoreboostAchete == false && score >= scoreboostCout) {
         scoreboostAchete = true;
         score -= scoreboostCout;
         cookieScore.textContent = score;
-
         bonusMultiplier = 2;
-
         let timeLeft = 30;
         bonusBtn.textContent = `200% Bonus (${timeLeft}sec)`;
-
         const countdown = setInterval(function() {
             timeLeft--;
             if (timeLeft <= 0) {
@@ -99,7 +98,25 @@ async function acheterBonus(event) {
     }
 }
 
+function checkScore() {
+    const buttons = [
+        { nom: autoclickerBtn, cout: autoclicCout },
+        { nom: bonusBtn, cout: scoreboostCout },
+        { nom: multiplierBtn, cout: 50 * Math.pow(2, multiplierCount) },
+    ];
+
+    for (let i = 0; i < buttons.length; i++) {
+        if (score >= buttons[i].cout) {
+            buttons[i].nom.removeAttribute("disabled");
+        } else {
+            buttons[i].nom.setAttribute("disabled", "");
+        }
+    }
+}
+
 multiplierBtn.addEventListener('click', augmenterMultiplicateur)
 cookieBtn.addEventListener('click', incrementScore)
 autoclickerBtn.addEventListener('click', acheterAutoclicker)
 bonusBtn.addEventListener('click', acheterBonus)
+
+setInterval(checkScore, 1000)
