@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to { 
+    transform: rotate(360deg);
+  }
+}
+
+.cookie-img {
+    width: 250px;
+    animation-name:            rotate; 
+    animation-duration:        60s; 
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    transition: transform 150ms ease-in-out;
+}
+
+.cookie-img:active {
+    transform: scale(0.8)
+}
