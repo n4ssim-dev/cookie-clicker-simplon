@@ -11,22 +11,34 @@
     <header>
         <a href="/index.html">Cookie Clicker</a>
         <div>
-            <a href="README.md">Documentation (README.md)</a>
-            <a href="https://simplonline-v3-prod.s3.eu-west-3.amazonaws.com/media/file/pdf/readme-fr-6a14a815bd13a750894239.pdf">Consignes</a>
-            <a>Lien 3</a>
+            <a class="header-link" href="README.md">Documentation</a>
+            <a class="header-link" href="https://simplonline-v3-prod.s3.eu-west-3.amazonaws.com/media/file/pdf/readme-fr-6a14a815bd13a750894239.pdf" target="_blank">Consignes</a>
+            <a class="header-link" href="https://www.github.com/n4ssim-dev/cookie-clicker-simplon" target="_blank">Dépôt GitHub</a>
         </div>
     </header>
 
     <main>
-        <div>
+        <div class="cookie-clicker">
             <h3 id="titre"></h3>
-            <button id="click" class="btn-cookie">
-                <img class="cookie-img" src="https://pngimg.com/uploads/cookie/cookie_PNG13656.png"/>
-            </button>
+        <button id="click" class="btn-cookie">
+            <svg class="cookie-svg" viewBox="0 0 200 200">
+                <circle cx="100" cy="100" r="90" class="cookie-base"/>
+
+                <!-- pépites -->
+                <circle cx="60" cy="70" r="8" class="chip"/>
+                <circle cx="120" cy="55" r="10" class="chip"/>
+                <circle cx="145" cy="100" r="9" class="chip"/>
+                <circle cx="80" cy="120" r="11" class="chip"/>
+                <circle cx="125" cy="145" r="8" class="chip"/>
+                <circle cx="55" cy="150" r="7" class="chip"/>
+                <circle cx="95" cy="90" r="6" class="chip"/>
+            </svg>
+        </button>
+
             <div id="affichage">
                 <div class="score">
+                    <p>Nombre de cookies :</p>
                     <h3 id="cookie-score">0</h3>
-                    <p>Nombre de cookies</p>
                 </div>
 
                 <div class="multiplier">
